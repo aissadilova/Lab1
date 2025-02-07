@@ -1,9 +1,22 @@
 class StringManipulator:
-    def __init__(self):
+   def__init__(self):
         self.text = ""
-    
+
     def getString(self):
-        self.text = input("Enter a string: ")
-    
+        while True:
+            self.text = input("Введите строку: ").strip()
+            if self.text:
+                break
+            print("Ошибка: строка не может быть пустой!")
+
     def printString(self):
-        print(self.text.upper())
+        if self.text:
+            print("Результат:", self.text.upper())
+        else:
+            print("Ошибка: сначала введите строку с помощью getString()!")
+
+# Использование
+if __name__ == "__main__":
+    obj = StringManipulator()
+    obj.getString()
+    obj.printString()
