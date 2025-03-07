@@ -1,43 +1,53 @@
+# Определяем функцию-генератор, которая возвращает квадраты чисел от 0 до N
 def square_generator(N):
-    for i in range(N + 1):
-        yield i ** 2
+    for i in range(N + 1):  # Перебираем числа от 0 до N включительно
+        yield i ** 2  # Возвращаем квадрат числа i
 
 
+# Функция-генератор, которая возвращает строки с четными числами от 0 до n
 def even_numbers(n):
-    return (str(i) for i in range(n + 1) if i % 2 == 0)
+    return (str(i) for i in range(n + 1) if i % 2 == 0)  # Генерируем четные числа и сразу превращаем их в строки
 
 
+# Функция-генератор, которая возвращает числа, делящиеся на 3 и 4 в диапазоне от 0 до n
 def divisible_by_3_and_4(n):
-    for i in range(n + 1):
-        if i % 3 == 0 and i % 4 == 0:
-            yield i
+    for i in range(n + 1):  # Перебираем числа от 0 до n включительно
+        if i % 3 == 0 and i % 4 == 0:  # Проверяем, делится ли число на 3 и 4 одновременно
+            yield i  # Возвращаем число
 
 
+# Функция-генератор, которая возвращает квадраты чисел в диапазоне от a до b включительно
 def squares(a, b):
-    for i in range(a, b + 1):
-        yield i ** 2
+    for i in range(a, b + 1):  # Перебираем числа от a до b включительно
+        yield i ** 2  # Возвращаем квадрат числа i
 
 
+# Функция-генератор, которая выполняет обратный отсчет от n до 0
 def countdown(n):
-    for i in range(n, -1, -1):
-        yield i
+    for i in range(n, -1, -1):  # Перебираем числа от n до 0 включительно, уменьшаясь на 1
+        yield i  # Возвращаем текущее число
 
 
-# Example usage
+# ✅ Пример использования функций
+
+# 1️⃣ Вводим число и выводим четные числа от 0 до n
 n = int(input("Enter a number for even numbers: "))
-print(", ".join(even_numbers(n)))
+print(", ".join(even_numbers(n)))  # Объединяем результаты через запятую и выводим строкой
 
+# 2️⃣ Вводим число и выводим все числа, которые делятся на 3 и 4
 print("\nNumbers divisible by 3 and 4:")
 n = int(input("Enter a number for divisibility check: "))
-for num in divisible_by_3_and_4(n):
+for num in divisible_by_3_and_4(n):  # Перебираем и выводим все подходящие числа
     print(num, end=" ")
 
+# 3️⃣ Вводим диапазон a и b и выводим квадраты чисел в этом диапазоне
 print("\n\nSquares in range:")
-a, b = map(int, input("Enter range (a b): ").split())
-for num in squares(a, b):
+a, b = map(int, input("Enter range (a b): ").split())  # Вводим два числа и разделяем их
+for num in squares(a, b):  # Перебираем и выводим квадраты чисел от a до b
     print(num, end=" ")
 
+# 4️⃣ Вводим число и выполняем обратный отсчет до 0
 print("\n\nCountdown:")
 n = int(input("Enter a number for countdown: "))
-for num in countdown(n):
+for num in countdown(n):  # Перебираем числа в убывающем порядке и выводим
     print(num, end=" ")
