@@ -1,64 +1,63 @@
 import pygame
-import random
-from pygame.locals import *
-
-# Настройка игры
 pygame.init()
-screen_width = 400
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Мультяшные Гонки")
 
-# Цвета (добавим BLACK)
-SKY_BLUE = (135, 206, 235)
-ROAD_COLOR = (50, 50, 50)
-CAR_COLOR = (255, 100, 100)
-PLAYER_COLOR = (100, 100, 255)
-COIN_COLOR = (255, 215, 0)
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)  # Вот это я пропустил!
+# Делаем окошко
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("Моя рисовалка")
 
-# Игрок
-class Player:
-    def __init__(self):
-        self.width = 50
-        self.height = 80
-        self.x = screen_width // 2 - self.width // 2
-        self.y = screen_height - self.height - 20
-        self.speed = 5
-    
-    def draw(self):
-        pygame.draw.rect(screen, PLAYER_COLOR, (self.x, self.y, self.width, self.height))
-        pygame.draw.rect(screen, SKY_BLUE, (self.x + 15, self.y + 10, 20, 15))
-        pygame.draw.rect(screen, WHITE, (self.x + 5, self.y + 10, 8, 5))
-        pygame.draw.circle(screen, BLACK, (self.x + 15, self.y + self.height - 10), 8)
-        pygame.draw.circle(screen, BLACK, (self.x + self.width - 15, self.y + self.height - 10), 8)
-    
-    def move(self, keys):
-        if keys[K_LEFT] and self.x > 20:
-            self.x -= self.speed
-        if keys[K_RIGHT] and self.x < screen_width - self.width - 20:
-            self.x += self.speed
+# Цвета
+белый = (255, 255, 255)
+красный = (255, 0, 0)
 
-# Остальной код остается без изменений...
-# [Здесь должен быть весь остальной код из предыдущего примера]
+# Переменные для рисования
+рисую = False
+толщина = 3
+начало_x, начало_y = 0, 0
+конец_x, конец_y = 0, 0
 
-# Главный цикл игры
-running = True
-while running:
+# Очищаем экран
+screen.fill(белый)
+pygame.display.flip()
+
+# Главный цикл
+работает = True
+while работает:
     for event in pygame.event.get():
-        if event.type == QUIT:
-            running = False
+        if event.type == pygame.QUIT:
+            работает = False
+        
+        # Нажали мышку
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            рисую = True
+            начало_x, начало_y = event.pos
+            конец_x, конец_y = event.pos
+        
+        # Двигаем мышку
+        if event.type == pygame.MOUSEMOTION:
+            if рисую:
+                конец_x, конец_y = event.pos
+                screen.fill(белый)  # Очищаем
+                # Рисуем прямоугольник
+                rect = pygame.Rect(
+                    min(начало_x, конец_x),
+                    min(начало_y, конец_y),
+                    abs(конец_x - начало_x),
+                    abs(конец_y - начало_y)
+                )
+                pygame.draw.rect(screen, красный, rect, толщина)
+        
+        # Отпустили мышку
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            рисую = False
+        
+        # Меняем толщину
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_PLUS:  # Плюс
+                толщина += 1
+            elif event.key == pygame.K_MINUS:  # Минус
+                if толщина > 1:
+                    толщина -= 1
     
-    keys = pygame.key.get_pressed()
-    player.move(keys)
-    
-    screen.fill(SKY_BLUE)
-    pygame.draw.rect(screen, ROAD_COLOR, (20, 0, screen_width-40, screen_height))
-    
-    # [Остальная часть игрового цикла...]
-    
-    pygame.display.update()
-    clock.tick(FPS)
+    pygame.display.flip()
 
 pygame.quit()
