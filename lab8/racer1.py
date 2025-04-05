@@ -29,7 +29,7 @@ font = pygame.font.SysFont("Verdana", 20)
 
 # Create a white screen 
 DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-DISPLAYSURF.fill(WHITE)
+DISPLAYSURF.fill(RED)
 pygame.display.set_caption("Racer Game")
 
 class Enemy(pygame.sprite.Sprite):
