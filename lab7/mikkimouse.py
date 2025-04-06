@@ -10,9 +10,9 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mickey Mouse Clock")
 
 # Загрузка изображений
-face = pygame.image.load('clock.png')
-minute_hand = pygame.image.load('min_hand.png')
-second_hand = pygame.image.load('sec_hand.png')
+face = pygame.image.load('lab7\clock.png')
+minute_hand = pygame.image.load('lab7\min_hand.png')
+second_hand = pygame.image.load('lab7\sec_hand.png')
 
 # Масштабирование при необходимости
 face = pygame.transform.scale(face, (WIDTH, HEIGHT))
