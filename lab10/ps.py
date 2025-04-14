@@ -1,19 +1,19 @@
-import psycopg2
-import csv
+import psycopg2 #для работы с PostgreSQL
+import csv #для чтения CSV-файлов
 
-con = psycopg2.connect(
-    dbname='Phonebook',
+con = psycopg2.connect(  #Устанавливается соединение с базой данных PostgreSQL. Параметры, передаваемые в connect, указывают, куда именно подключиться
+    dbname='Phonebook', #название базы данных
     user='postgres',
     password='postgres',
-    host='localhost',
+    host='localhost', #локальный сервер
     )
 
 cur = con.cursor()
 
 
 cur.execute(
-    'CREATE TABLE IF NOT EXISTS phone_book ('
-    'id SERIAL PRIMARY KEY,'
+    'CREATE TABLE IF NOT EXISTS phone_book ('# Создает таблицу, если она еще не существует
+    'id SERIAL PRIMARY KEY,' # Столбец id, который автоматически увеличивается (первичный ключ)
     'username varchar(50),'
     'phone varchar(50)'
     ')'
